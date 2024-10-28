@@ -4,6 +4,6 @@
 	import { components } from '$lib/slices';
 </script>
 
-<SliceSimulator let:slices>
+<SliceSimulator let:slices background="#555555">
 	<SliceZone {slices} {components} />
 </SliceSimulator>

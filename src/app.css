@@ -8,7 +8,7 @@ h1, h2, h3, h4, h5, h6 {
 body {
 	font-family: 'DM Sans Variable', sans-serif;
 	background-image: url('/assets/noise-texture.svg');
-	@apply grid bg-gray-950 bg-repeat text-gray-50;
+	@apply grid bg-neutral-900 bg-repeat text-gray-50;
 }
 
 .glass-container {

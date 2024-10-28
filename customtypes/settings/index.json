@@ -44,6 +44,13 @@
 								"allowText": true
 							}
 						},
+						"label": {
+							"type": "Text",
+							"config": {
+								"label": "label",
+								"placeholder": ""
+							}
+						},
 						"cta_button": {
 							"type": "Boolean",
 							"config": {
