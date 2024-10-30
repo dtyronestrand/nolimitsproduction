@@ -1,0 +1,63 @@
+{
+  "id": "staff",
+  "type": "SharedSlice",
+  "name": "Staff",
+  "description": "Staff",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading2,strong,em"
+          }
+        },
+        "staffcard": {
+          "type": "Group",
+          "config": {
+            "label": "StaffCard",
+            "repeat": true,
+            "fields": {
+              "avatar": {
+                "type": "Image",
+                "config": {
+                  "label": "Avatar",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "name": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Name",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "single": "heading3,strong,em"
+                }
+              },
+              "bio": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Bio",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "single": "paragraph,strong,em"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

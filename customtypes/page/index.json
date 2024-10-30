@@ -27,6 +27,18 @@
 				"fieldset": "Slice Zone",
 				"config": {
 					"choices": {
+						"news_item": {
+							"type": "SharedSlice"
+						},
+						"staff": {
+							"type": "SharedSlice"
+						},
+						"hero": {
+							"type": "SharedSlice"
+						},
+						"bento": {
+							"type": "SharedSlice"
+						},
 						"rich_text": {
 							"type": "SharedSlice"
 						}

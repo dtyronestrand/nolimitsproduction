@@ -1,0 +1,109 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Tired"
+						}
+					}
+				]
+			},
+			"content": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"title",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "heading3",
+											"content": {
+												"text": "Nodded"
+											}
+										}
+									]
+								}
+							],
+							[
+								"body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Dolore in laboris dolore occaecat ad quis laborum nisi labore. Occaecat qui culpa incididunt do est."
+											}
+										}
+									]
+								}
+							],
+							[
+								"image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6",
+										"width": 3212,
+										"height": 3880
+									},
+									"url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6",
+									"width": 3212,
+									"height": 3880,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"credits": null,
+									"alt": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"link",
+								{
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://twitter.com"
+									}
+								}
+							],
+							[
+								"label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "spirit",
+									"type": "Text"
+								}
+							],
+							[
+								"reverse",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": true
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

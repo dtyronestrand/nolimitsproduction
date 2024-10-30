@@ -21,7 +21,7 @@
         <ul class="px-[1,5rem] py-[2rem] flex items-center justify-center">
             {#each settings.data.navigation as item}
             <li >
-                <PrismicLink class="text-yellow-500 md:mx-0 md:my-[20px]  md:tranition-color md:duration:0.5s min-h-11 items-center p-[1rem] text-md mx-0 my-[5px] inline-block hover:text-orange-600/100" field={item.link}/>
+                <PrismicLink class="text-yellow-500 md:mx-0 md:my-[20px]  md:tranition-color md:duration:0.5s min-h-11 items-center p-[1rem] text-md mx-0 my-[5px] inline-block hover:text-orange-600/100" field={item.link}>{item.label}</PrismicLink>
             </li>
             {/each}
         </ul>
