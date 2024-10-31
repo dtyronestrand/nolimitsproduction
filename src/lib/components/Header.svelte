@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Wordmark from "./Wordmark.svelte";
     import ButtonLink from "./ButtonLink.svelte";
     import {PrismicLink,PrismicText} from '@prismicio/svelte'

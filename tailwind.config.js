@@ -4,6 +4,6 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [require('daisyui'), require('@tailwindcss/typography'),],
+  plugins: [require('daisyui','@tailwindcss/typography')],
 }
 

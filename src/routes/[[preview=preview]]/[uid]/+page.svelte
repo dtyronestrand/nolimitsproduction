@@ -4,6 +4,9 @@
 	import { components } from '$lib/slices';
 
 	export let data;
+console.log(data);
+	
 </script>
 
-<SliceZone slices={data.page.data.slices} {components} />
+
+<SliceZone slices={data.slices} {components} />

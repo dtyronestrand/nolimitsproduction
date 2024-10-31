@@ -7,13 +7,10 @@
 	export let slice: Content.RichTextSlice;
 </script>
 
-<Bounded class="">
-	<PrismicRichText
-		field={slice.primary.content}
-		components={{
-			heading1: Heading1
-		}}
-	/>
+<Bounded>
+
+		<PrismicRichText field={slice.primary.content} compoonents={{heading1: Heading1}}/>
+
 	</Bounded>
 
 

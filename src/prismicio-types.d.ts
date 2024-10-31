@@ -4,7 +4,105 @@ import type * as prismic from '@prismicio/client';
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
+type LocationDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Location documents
+ */
+interface LocationDocumentData {
+	/**
+	 * Title field in *Location*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: location.title
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	title: prismic.RichTextField;
+
+	/**
+	 * Body field in *Location*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: location.body
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	body: prismic.RichTextField;
+
+	/**
+	 * Image field in *Location*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: location.image
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/field#image
+	 */
+	image: prismic.ImageField<never>;
+
+	/**
+	 * Slice Zone field in *Location*
+	 *
+	 * - **Field Type**: Slice Zone
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: location.slices[]
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/field#slices
+	 */
+	slices: prismic.SliceZone<LocationDocumentDataSlicesSlice> /**
+	 * Meta Title field in *Location*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: A title of the page used for social media and search engines
+	 * - **API ID Path**: location.meta_title
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */;
+	meta_title: prismic.KeyTextField;
+
+	/**
+	 * Meta Description field in *Location*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: A brief summary of the page
+	 * - **API ID Path**: location.meta_description
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */
+	meta_description: prismic.KeyTextField;
+
+	/**
+	 * Meta Image field in *Location*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: location.meta_image
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/field#image
+	 */
+	meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Location document from Prismic
+ *
+ * - **API ID**: `location`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type LocationDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+	Simplify<LocationDocumentData>,
+	'location',
+	Lang
+>;
+
 type PageDocumentDataSlicesSlice =
+	| ProgramsSlice
 	| NewsItemSlice
 	| StaffSlice
 	| HeroSlice
@@ -81,6 +179,103 @@ interface PageDocumentData {
 export type PageDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
 	Simplify<PageDocumentData>,
 	'page',
+	Lang
+>;
+
+type ProgramDocumentDataSlicesSlice = RichTextSlice;
+
+/**
+ * Content for Program documents
+ */
+interface ProgramDocumentData {
+	/**
+	 * Title field in *Program*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: program.title
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	title: prismic.RichTextField;
+
+	/**
+	 * Tag Line field in *Program*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: program.tag_line
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	tag_line: prismic.RichTextField;
+
+	/**
+	 * Image field in *Program*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: program.image
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/field#image
+	 */
+	image: prismic.ImageField<never>;
+
+	/**
+	 * Slice Zone field in *Program*
+	 *
+	 * - **Field Type**: Slice Zone
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: program.slices[]
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/field#slices
+	 */
+	slices: prismic.SliceZone<ProgramDocumentDataSlicesSlice> /**
+	 * Meta Title field in *Program*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: A title of the page used for social media and search engines
+	 * - **API ID Path**: program.meta_title
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */;
+	meta_title: prismic.KeyTextField;
+
+	/**
+	 * Meta Description field in *Program*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: A brief summary of the page
+	 * - **API ID Path**: program.meta_description
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */
+	meta_description: prismic.KeyTextField;
+
+	/**
+	 * Meta Image field in *Program*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: program.meta_image
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/field#image
+	 */
+	meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Program document from Prismic
+ *
+ * - **API ID**: `program`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ProgramDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+	Simplify<ProgramDocumentData>,
+	'program',
 	Lang
 >;
 
@@ -184,7 +379,7 @@ export type SettingsDocument<Lang extends string = string> = prismic.PrismicDocu
 	Lang
 >;
 
-export type AllDocumentTypes = PageDocument | SettingsDocument;
+export type AllDocumentTypes = LocationDocument | PageDocument | ProgramDocument | SettingsDocument;
 
 /**
  * Item in *Bento → Default → Primary → Box*
@@ -377,6 +572,58 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<'hero', HeroSliceVariation>;
 
 /**
+ * Primary content in *Locations → Default → Primary*
+ */
+export interface LocationsSliceDefaultPrimary {
+	/**
+	 * Title field in *Locations → Default → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locations.default.primary.title
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	title: prismic.RichTextField;
+
+	/**
+	 * Body field in *Locations → Default → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locations.default.primary.body
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	body: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Locations Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LocationsSliceDefault = prismic.SharedSliceVariation<
+	'default',
+	Simplify<LocationsSliceDefaultPrimary>,
+	never
+>;
+
+/**
+ * Slice variation for *Locations*
+ */
+type LocationsSliceVariation = LocationsSliceDefault;
+
+/**
+ * Locations Shared Slice
+ *
+ * - **API ID**: `locations`
+ * - **Description**: Locations
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LocationsSlice = prismic.SharedSlice<'locations', LocationsSliceVariation>;
+
+/**
  * Item in *Showcase → Default → Primary → Content*
  */
 export interface NewsItemSliceDefaultPrimaryContentItem {
@@ -493,6 +740,83 @@ type NewsItemSliceVariation = NewsItemSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type NewsItemSlice = prismic.SharedSlice<'news_item', NewsItemSliceVariation>;
+
+/**
+ * Item in *Programs → Default → Primary → Programs*
+ */
+export interface ProgramsSliceDefaultPrimaryProgramsItem {
+	/**
+	 * Program field in *Programs → Default → Primary → Programs*
+	 *
+	 * - **Field Type**: Content Relationship
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: programs.default.primary.programs[].program
+	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+	 */
+	program: prismic.ContentRelationshipField<'program'>;
+}
+
+/**
+ * Primary content in *Programs → Default → Primary*
+ */
+export interface ProgramsSliceDefaultPrimary {
+	/**
+	 * Heading field in *Programs → Default → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: programs.default.primary.heading
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	heading: prismic.RichTextField;
+
+	/**
+	 * Body field in *Programs → Default → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: programs.default.primary.body
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	body: prismic.RichTextField;
+
+	/**
+	 * Programs field in *Programs → Default → Primary*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: programs.default.primary.programs[]
+	 * - **Documentation**: https://prismic.io/docs/field#group
+	 */
+	programs: prismic.GroupField<Simplify<ProgramsSliceDefaultPrimaryProgramsItem>>;
+}
+
+/**
+ * Default variation for Programs Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProgramsSliceDefault = prismic.SharedSliceVariation<
+	'default',
+	Simplify<ProgramsSliceDefaultPrimary>,
+	never
+>;
+
+/**
+ * Slice variation for *Programs*
+ */
+type ProgramsSliceVariation = ProgramsSliceDefault;
+
+/**
+ * Programs Shared Slice
+ *
+ * - **API ID**: `programs`
+ * - **Description**: Programs
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProgramsSlice = prismic.SharedSlice<'programs', ProgramsSliceVariation>;
 
 /**
  * Primary content in *RichText → Default → Primary*
@@ -644,9 +968,15 @@ declare module '@prismicio/client' {
 
 	namespace Content {
 		export type {
+			LocationDocument,
+			LocationDocumentData,
+			LocationDocumentDataSlicesSlice,
 			PageDocument,
 			PageDocumentData,
 			PageDocumentDataSlicesSlice,
+			ProgramDocument,
+			ProgramDocumentData,
+			ProgramDocumentDataSlicesSlice,
 			SettingsDocument,
 			SettingsDocumentData,
 			SettingsDocumentDataNavigationItem,
@@ -660,11 +990,20 @@ declare module '@prismicio/client' {
 			HeroSliceDefaultPrimary,
 			HeroSliceVariation,
 			HeroSliceDefault,
+			LocationsSlice,
+			LocationsSliceDefaultPrimary,
+			LocationsSliceVariation,
+			LocationsSliceDefault,
 			NewsItemSlice,
 			NewsItemSliceDefaultPrimaryContentItem,
 			NewsItemSliceDefaultPrimary,
 			NewsItemSliceVariation,
 			NewsItemSliceDefault,
+			ProgramsSlice,
+			ProgramsSliceDefaultPrimaryProgramsItem,
+			ProgramsSliceDefaultPrimary,
+			ProgramsSliceVariation,
+			ProgramsSliceDefault,
 			RichTextSlice,
 			RichTextSliceDefaultPrimary,
 			RichTextSliceVariation,

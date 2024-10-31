@@ -11,11 +11,12 @@ body {
 	@apply grid bg-neutral-900 bg-repeat text-gray-50;
 }
 
-.glass-container {
+
+.glass-container-logo {
 	position: relative;
 }
 
-.glass-container-logo {
+.glass-container {
 	position: relative;
 }
 

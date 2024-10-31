@@ -8,7 +8,7 @@
 	export let slice: Content.StaffSlice;
 </script>
 
-<Bounded class="relative overflow-hidden" data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+<Bounded class="relative " data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
 	<img src={background} alt="" class="absolute inset-0 h-full w-full object-cover" />
 
 	<div class="relative">
