@@ -19,28 +19,26 @@
 		<PrismicRichText field={slice.primary.body} />
 	</div>
 
-	
+	<div class="mt-16 grid max-w-4xl grid-rows-[auto_auto_auto] gap-8 md:grid-cols-3 md:gap-10">
 		{#each slice.primary.box as item}
-			<div
-				class={clsx(
-					"card glass-card row-span-3 grid grid-rows-subgrid gap-4 rounded-lg bg-gray-950/60 p-4 before:bg-gray-100/10",
-					item.wide ? 'md:col-span-2' : 'md:col-span-1'
-				)}
-			>
-			<div class="flex text-balance text-center flex-row">
+		<div
+		class={clsx(
+			'glass-container row-span-3 grid grid-rows-subgrid gap-4 rounded-lg bg-gray-950/60 p-4 before:bg-gray-100/10',
+			item.wide ? 'md:col-span-2' : 'md:col-span-1'
+		)}
+	>
+			
 				<h3 class="text-2xl">
 					<PrismicText field={item.title} />
 				</h3>
-			</div>
-				<div class="prose pose-invert max-w-md text-balance text-gray-300">
+		
+				<div class="max-w-md text-balance text-gray-300">
 					<PrismicRichText field={item.body} />
 				</div>
-				<div class="avatar">
-					<div class="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
-					  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-					</div>
-				  </div>
+				
+					<PrismicImage class="max-h-36 w-auto" field={item.image} />
+				
 			</div>
 		{/each}
-
+	</div>
 </Bounded>

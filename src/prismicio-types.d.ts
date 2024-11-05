@@ -102,6 +102,7 @@ export type LocationDocument<Lang extends string = string> = prismic.PrismicDocu
 >;
 
 type PageDocumentDataSlicesSlice =
+	| CtaSlice
 	| ProgramsSlice
 	| NewsItemSlice
 	| StaffSlice
@@ -488,6 +489,88 @@ type BentoSliceVariation = BentoSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type BentoSlice = prismic.SharedSlice<'bento', BentoSliceVariation>;
+
+/**
+ * Primary content in *Cta → Default → Primary*
+ */
+export interface CtaSliceDefaultPrimary {
+	/**
+	 * Image field in *Cta → Default → Primary*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: cta.default.primary.image
+	 * - **Documentation**: https://prismic.io/docs/field#image
+	 */
+	image: prismic.ImageField<never>;
+
+	/**
+	 * Heading field in *Cta → Default → Primary*
+	 *
+	 * - **Field Type**: Title
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: cta.default.primary.heading
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	heading: prismic.TitleField;
+
+	/**
+	 * description field in *Cta → Default → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: cta.default.primary.description
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	description: prismic.RichTextField;
+
+	/**
+	 * Link field in *Cta → Default → Primary*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: cta.default.primary.link
+	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+	 */
+	link: prismic.LinkField;
+
+	/**
+	 * Label field in *Cta → Default → Primary*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: cta.default.primary.label
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */
+	label: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Cta Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CtaSliceDefault = prismic.SharedSliceVariation<
+	'default',
+	Simplify<CtaSliceDefaultPrimary>,
+	never
+>;
+
+/**
+ * Slice variation for *Cta*
+ */
+type CtaSliceVariation = CtaSliceDefault;
+
+/**
+ * Cta Shared Slice
+ *
+ * - **API ID**: `cta`
+ * - **Description**: Cta
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CtaSlice = prismic.SharedSlice<'cta', CtaSliceVariation>;
 
 /**
  * Primary content in *Hero → Default → Primary*
@@ -986,6 +1069,10 @@ declare module '@prismicio/client' {
 			BentoSliceDefaultPrimary,
 			BentoSliceVariation,
 			BentoSliceDefault,
+			CtaSlice,
+			CtaSliceDefaultPrimary,
+			CtaSliceVariation,
+			CtaSliceDefault,
 			HeroSlice,
 			HeroSliceDefaultPrimary,
 			HeroSliceVariation,

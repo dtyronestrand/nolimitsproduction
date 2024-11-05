@@ -12,9 +12,7 @@ body {
 }
 
 
-.glass-container-logo {
-	position: relative;
-}
+
 
 .glass-container {
 	position: relative;
@@ -24,10 +22,7 @@ body {
 	@apply absolute -inset-[10px] -z-10 rounded-xl border border-gray-100/20 bg-gray-200/10 backdrop-blur-md;
 	content: '';
 }
-.glass-container-logo::before {
-	@apply absolute -inset-[10px] -z-10 rounded-[50%] border border-red-300/20 bg-gray-200/10 backdrop-blur-md;
-	content: '';
-}
+
 .signal-line {
 	--rotation: 90deg;
 	@apply h-[20px] w-[1.5px] bg-gradient-to-t md:h-[1.5px] md:w-[30px] lg:w-[40px] xl:w-[50px];

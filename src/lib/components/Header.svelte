@@ -1,50 +1,116 @@
-<script lang="ts">
-    import Wordmark from "./Wordmark.svelte";
-    import ButtonLink from "./ButtonLink.svelte";
-    import {PrismicLink,PrismicText} from '@prismicio/svelte'
-    /**@type{import("@prismicio/client").Content.SettingsDocument}*/
-    export let settings;
+<script>
+	import { PrismicLink } from '@prismicio/svelte';
+
+	import IconClose from '~icons/ph/x-bold';
+	import IconMenu from '~icons/ph/list-bold';
+
+	
+	import ButtonLink from './ButtonLink.svelte';
+	import clsx from 'clsx';
+	import { asLink } from '@prismicio/client';
+	import { page } from '$app/stores';
+
+	/** @type {import("@prismicio/client").Content.SettingsDocument} */
+	export let settings;
+
+	let isOpen = false;
+	const toggleOpen = () => (isOpen = !isOpen);
+	const close = () => (isOpen = false);
+
+	/** @param {import('@prismicio/client').LinkField} link*/
+	const isActive = (link) => {
+		const path = asLink(link);
+
+		return path && $page.url.pathname.includes(path);
+	};
 </script>
-<header>
-<nav aria-label="main" class="hover:backdrop-blur-md filter" >
-    <ul class="flex gap-6">
-        {#each settings.data.navigation as item, index}
-        <li class="z-2 transition-border duration-[0.2s] ease text-decoration-none p-[25px] pb-[3px] pt-[3px] ml-[5px] m-[10px] border-[1px solid gray-400] rounded-[25px] text-3xl hover:border-[1px solid gray-400/50] hover:backdrop-blur-xl hover:filter">
-        {#if item.cta_button}
-        <ButtonLink field={item.link} >
-        {item.label}
-        </ButtonLink>
-        {:else}
-        <PrismicLink  field={item.link} >
-       {item.label}
-        </PrismicLink>
-        {/if}
-    </li>
-        {/each}
-    </ul>
-</nav>
+
+<header class="p-4 md:p-6">
+	<nav
+		class="mx-auto flex max-w-6xl flex-col justify-between py-2 font-medium text-white md:flex-row md:items-center"
+		aria-label="Main"
+	>
+		<div class="flex items-center justify-between">
+			<a href="/" on:click={close} class="z-50">
+				
+				<span class="sr-only">{settings.data.site_title} home page</span>
+			</a>
+
+			<button
+				type="button"
+				class="block p-2 text-3xl text-white md:hidden"
+				aria-expanded={isOpen}
+				on:click={toggleOpen}
+			>
+				<IconMenu />
+			</button>
+		</div>
+
+		<!-- Mobile Nav -->
+		<div
+			class={clsx(
+				'fixed inset-0 z-40 flex flex-col items-end bg-gray-950 pr-4 pt-6 transition-transform duration-300 ease-in-out md:hidden',
+				isOpen ? 'translate-x-0' : 'translate-x-[100%]'
+			)}
+		>
+			<button
+				aria-expanded={isOpen}
+				type="button"
+				class="block p-2 text-3xl text-white md:hidden"
+				on:click={toggleOpen}
+			>
+				<IconClose />
+			</button>
+			<ul class="grid justify-items-end gap-8">
+				{#each settings.data.navigation as item (item.label)}
+					<li>
+						{#if item.cta_button}
+							<ButtonLink
+								field={item.link}
+								on:click={close}
+								aria-current={isActive(item.link) ? 'page' : undefined}
+							>
+								{item.label}
+							</ButtonLink>
+						{:else}
+							<PrismicLink
+								on:click={close}
+								field={item.link}
+								class=" block min-h-11 px-3 text-3xl first:mt-8"
+								aria-current={isActive(item.link) ? 'page' : undefined}
+							>
+								{item.label}
+							</PrismicLink>
+						{/if}
+					</li>
+				{/each}
+			</ul>
+		</div>
+
+		<!-- Desktop Nav -->
+		<ul class="hidden gap-6 md:flex">
+			{#each settings.data.navigation as item (item.label)}
+				<li>
+					{#if item.cta_button}
+						<ButtonLink
+							field={item.link}
+							on:click={close}
+							aria-current={isActive(item.link) ? 'page' : undefined}
+						>
+							{item.label}
+						</ButtonLink>
+					{:else}
+						<PrismicLink
+							on:click={close}
+							field={item.link}
+							class="inline-flex min-h-11 items-center"
+							aria-current={isActive(item.link) ? 'page' : undefined}
+						>
+							{item.label}
+						</PrismicLink>
+					{/if}
+				</li>
+			{/each}
+		</ul>
+	</nav>
 </header>
-
-<style>
-    nav {
-	transition: backdrop-filter 0.3s ease;
-	display: flex;
-	background-color: rgba(100, 100, 100, 0.2);
-	padding: 0px;
-	justify-content: center;
-	z-index: 1;
-	backdrop-filter: blur(
-		2px
-	); /* Disable this to have a Macos-like top bar
-	border-radius: 0px 0px 10px 10px;
-	border-top: none;
-	margin-left: 50px;
-	margin-right: 50px;*/
-	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-	min-height: 50px;
-	width: 100vw;
-	align-items: center;
-}
-
-
-</style>

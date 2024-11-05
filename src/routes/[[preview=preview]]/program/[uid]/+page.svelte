@@ -19,7 +19,6 @@
 			<PrismicText field={data.page.data.tag_line} />
 		</p>
 		<figure class="rounded-lg">
-			
 			<PrismicImage field={data.page.data.image} />
 		</figure>
 	</div>

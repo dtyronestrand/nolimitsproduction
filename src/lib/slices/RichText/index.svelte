@@ -8,8 +8,10 @@
 </script>
 
 <Bounded>
+		<div class="prose prose-lg prose-invert w-full">
 
-		<PrismicRichText field={slice.primary.content} compoonents={{heading1: Heading1}}/>
+			<PrismicRichText field={slice.primary.content} components={{heading1: Heading1}}/>
+		</div>
 
 	</Bounded>
 
