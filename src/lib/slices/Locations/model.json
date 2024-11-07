@@ -29,6 +29,25 @@
             "allowTargetBlank": true,
             "single": "paragraph,strong,em"
           }
+        },
+        "locations": {
+          "type": "Group",
+          "config": {
+            "label": "Locations",
+            "repeat": true,
+            "fields": {
+              "location": {
+                "type": "Link",
+                "config": {
+                  "label": "Location",
+                  "select": "document",
+                  "customtypes": [
+                    "location"
+                  ]
+                }
+              }
+            }
+          }
         }
       },
       "items": {}

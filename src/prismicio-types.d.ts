@@ -655,6 +655,21 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<'hero', HeroSliceVariation>;
 
 /**
+ * Item in *Locations → Default → Primary → Locations*
+ */
+export interface LocationsSliceDefaultPrimaryLocationsItem {
+	/**
+	 * Location field in *Locations → Default → Primary → Locations*
+	 *
+	 * - **Field Type**: Content Relationship
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locations.default.primary.locations[].location
+	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+	 */
+	location: prismic.ContentRelationshipField<'location'>;
+}
+
+/**
  * Primary content in *Locations → Default → Primary*
  */
 export interface LocationsSliceDefaultPrimary {
@@ -677,6 +692,16 @@ export interface LocationsSliceDefaultPrimary {
 	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
 	 */
 	body: prismic.RichTextField;
+
+	/**
+	 * Locations field in *Locations → Default → Primary*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: locations.default.primary.locations[]
+	 * - **Documentation**: https://prismic.io/docs/field#group
+	 */
+	locations: prismic.GroupField<Simplify<LocationsSliceDefaultPrimaryLocationsItem>>;
 }
 
 /**
@@ -1078,6 +1103,7 @@ declare module '@prismicio/client' {
 			HeroSliceVariation,
 			HeroSliceDefault,
 			LocationsSlice,
+			LocationsSliceDefaultPrimaryLocationsItem,
 			LocationsSliceDefaultPrimary,
 			LocationsSliceVariation,
 			LocationsSliceDefault,
