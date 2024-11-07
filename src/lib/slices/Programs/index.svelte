@@ -18,7 +18,7 @@
 	</div>
 	<div class="mt-20 grid gap-16">
 		{#each programs as program, index}
-		<div class=" card card-glass border border-yellow-600 bg-gradient-to-t from-red-700/20 to-yellow-400/10 md:w-[15vw] h-auto via-orange-500/15 px-5 py-7">
+		<div class=" card card-glass border border-yellow-600 bg-gradient-to-t from-red-700/20 to-yellow-400/10 md:w-[20rem] h-auto via-orange-500/15 px-5 py-7">
 	
 				<h3 class="text-balance text-center text-4xl mb-3">
 					<PrismicText field={program.data.title}/>
