@@ -42,7 +42,20 @@
 				"type": "Slices",
 				"fieldset": "Slice Zone",
 				"config": {
-					"choices": {}
+					"choices": {
+						"bento": {
+							"type": "SharedSlice"
+						},
+						"news_item": {
+							"type": "SharedSlice"
+						},
+						"cta": {
+							"type": "SharedSlice"
+						},
+						"rich_text": {
+							"type": "SharedSlice"
+						}
+					}
 				}
 			}
 		},

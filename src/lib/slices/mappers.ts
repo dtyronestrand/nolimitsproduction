@@ -1,5 +1,6 @@
 import programsMapper from './Programs/mapper';
-
+import locationsMapper from './Locations/mapper';
 export const mappers = {
-    programs: programsMapper
+    programs: programsMapper,
+    locations: locationsMapper
     };

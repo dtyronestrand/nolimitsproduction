@@ -55,7 +55,8 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 3px solid;
+  @apply border-stone-500;
   border-radius: 1rem;
   color: #0f172a;
   box-shadow: 0 0 0.3em rgba(255, 255, 255, 0.5);
@@ -86,6 +87,7 @@
   border-radius: 1em;
   filter: blur(20px);
   animation: animate 5s linear infinite;
+ 
 }
 
 @keyframes animate {

@@ -4,7 +4,7 @@ import type * as prismic from '@prismicio/client';
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type LocationDocumentDataSlicesSlice = never;
+type LocationDocumentDataSlicesSlice = BentoSlice | NewsItemSlice | CtaSlice | RichTextSlice;
 
 /**
  * Content for Location documents
@@ -102,6 +102,7 @@ export type LocationDocument<Lang extends string = string> = prismic.PrismicDocu
 >;
 
 type PageDocumentDataSlicesSlice =
+	| LocationsSlice
 	| CtaSlice
 	| ProgramsSlice
 	| NewsItemSlice
