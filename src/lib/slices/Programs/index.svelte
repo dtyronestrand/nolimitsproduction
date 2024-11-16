@@ -18,7 +18,8 @@
 	</div>
 	<div class="mt-20 grid gap-16">
 		{#each programs as program, index}
-		<div class=" glass-container row-span-3 grid grid-rows-subgrid gap-4 md:w-[20rem] h-auto rounded-lg p-4 before:bg-yellow-400/40 border border-red-600 bg-gradient-to-t from-red-700/20 to-yellow-400/10 via-orange-500/15 ">
+		<div class= "glass-container relative rounded-lg bg-gradient-to-b from-orange-500 to-orange-700 p-4 mb-6 md:rounded-xl">
+			<div class="glow absolute -z-10 aspect-square w-full max-w-xl h-full rounded-full bg-yellow-400/50 blur-[160px] filter"/>
 	
 				<h3 class="text-balance text-center text-4xl mb-3">
 					<PrismicText field={program.data.title}/>
