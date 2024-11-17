@@ -8,6 +8,8 @@
 import '@fontsource-variable/dm-sans';
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
+	import {injectSpeedInsights} from '@vercel/speed-insights/sveltekit';
+	injectSpeedInsights();
 </script>
 
 <svelte:head>
