@@ -62,7 +62,7 @@ onMount(() => {
 	<PrismicImage class="rounded-[50%]" field={slice.primary.logo} />
 </div>
 	
-<ButtonLink class="hero__button opacity-0 mt-8" field={slice.primary.button_link}>{slice.primary.button_label}</ButtonLink>
+<ButtonLink class="hero__button text-4xl opacity-0 mt-12" field={slice.primary.button_link}>{slice.primary.button_label}</ButtonLink>
 	</div>
 </Bounded>
 <style>

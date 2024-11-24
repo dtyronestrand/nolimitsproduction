@@ -1,9 +1,7 @@
 <script>
 	import { PrismicLink } from '@prismicio/svelte';
-
 	import IconClose from '~icons/ph/x-bold';
 	import IconMenu from '~icons/ph/list-bold';
-
 	
 	import ButtonLink from './ButtonLink.svelte';
 	import clsx from 'clsx';
@@ -18,22 +16,27 @@
 	const close = () => (isOpen = false);
 
 	/** @param {import('@prismicio/client').LinkField} link*/
-	
 	const isActive = (link) => {
 		const path = asLink(link);
-
-		return path && $page.url.pathname.includes(path);
+		if (!path) return false;
+		
+		// Exact match for home page
+		if (path === '/') {
+			return $page.url.pathname === '/';
+		}
+		
+		// For other pages, check if the current path starts with the link path
+		return $page.url.pathname.startsWith(path);
 	};
 </script>
 
 <header class="p-4 md:p-6">
 	<nav
-		class="mx-auto flex max-w-6xl flex-col justify-between py-2 font-medium text-xl md:flex-row md:items-center"
+		class="mx-auto flex max-w-6xl flex-col justify-between py-2 font-medium text-2xl md:flex-row md:items-center"
 		aria-label="Main"
 	>
 		<div class="flex items-center justify-between">
 			<a href="/" on:click={close} class="z-50">
-				
 				<span class="sr-only">{settings.data.site_title} home page</span>
 			</a>
 
@@ -74,13 +77,18 @@
 								{label}
 							</ButtonLink>
 						{:else}
-						<PrismicLink
-						on:click={close}
-						field={link}
-						class="group first:mt-8 relative block overflow-hidden rounded px-3 py-1 text-3xl font-bold text-primary-100" 
-						aria-current={isActive(link) ? 'page' : undefined}
-					> <span class={`absolute inset-0 z-0 h-full rounded bg-orange-600 transition-transform duration-300 ease-in-out group-hover:translate-y-0 ${isActive(link) ? `translate-y-2`: `translate-y-4`}`}></span>
-						<span class="relative">{label}</span>
+							<PrismicLink
+								on:click={close}
+								field={link}
+								class="group first:mt-8 relative block overflow-hidden rounded px-3 py-1 text-3xl font-bold text-primary-100"
+								aria-current={isActive(link) ? 'page' : undefined}
+							>
+								<span 
+									class={`absolute inset-0 z-0 h-full rounded bg-orange-600 transition-transform duration-300 ease-in-out group-hover:translate-y-0 ${
+										isActive(link) ? 'translate-y-[calc(100%-4px)]' : 'translate-y-[100%]'
+									}`}
+								/>
+								<span class="relative">{label}</span>
 							</PrismicLink>
 						{/if}
 					</li>
@@ -104,10 +112,11 @@
 						<PrismicLink
 							on:click={close}
 							field={link}
-							class="group relative block overflow-hidden rounded px-3 py-1 text-base font-bold text-primary-100" 
+							class="group relative block overflow-hidden rounded px-3 py-1 text-base font-bold text-primary-100"
 							aria-current={isActive(link) ? 'page' : undefined}
-						> <span class={`absolute inset-0 z-0 h-full rounded bg-orange-600 transition-transform duration-300 ease-in-out group-hover:translate-y-0 ${isActive(link) ? `translate-y-6`: `translate-y-8`}`}></span>
-							<span class="relative">{label}</span>
+						>
+							<span class={`absolute inset-0 z-0 h-full rounded bg-orange-600 transition-transform duration-300 ease-in-out group-hover:translate-y-0 ${isActive(link) ? 'translate-y-[calc(100%-5px)]' : 'translate-y-[100%]'}`}></span>
+							<span class="text-xl relative">{label}</span>
 						</PrismicLink>
 					{/if}
 				</li>

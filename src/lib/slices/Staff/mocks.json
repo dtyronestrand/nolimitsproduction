@@ -73,6 +73,20 @@
 										}
 									]
 								}
+							],
+							[
+								"title",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "heading4",
+											"content": {
+												"text": "Football"
+											}
+										}
+									]
+								}
 							]
 						]
 					}

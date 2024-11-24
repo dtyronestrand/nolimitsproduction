@@ -6,10 +6,10 @@
 </script>
 <footer class="block w-[100%] max-h-[25vh] bg-zinc-800/40">
         <div class="md:p-[2rem] p-[1 rem] md:flex block items-center justify-center relative">
-            <section class="mx-[40px] my-0 items-left justify-left md:flex md:items-center md:justify-center md:w-[100%]">
+            <section class="mx-auto md:mx-[40px] my-0 items-left justify-left md:flex items-center md:justify-center md:w-[100%]">
                 <span class="px-[1 rem]"><i class="fa fa-map-marker text-orange-600 text-lg md:text-xl px-3"/></span><span class="text-yellow-500">No Limits Martial Arts and Fitness<br/>Beaverdam, VA</span>
             </section>
-            <section class="mx-[40px] my-0 items-left justify-left md:flex md:items-center md:justify-center md:w-[100%]">
+            <section class="ms-auto md:mx-[40px] my-0 items-left justify-left md:flex items-center md:justify-center md:w-[100%]">
                 <span class="px-[1 rem]"><i class="fa fa-phone text-orange-600 text-lg md:text-xl px-3"/></span><span class="text-yellow-500">804-867-5309</span>
             </section>
             <section class="mx-[40px] my-0 items-left justify-left md:flex md:items-center md:justify-center md:w-[100%]">

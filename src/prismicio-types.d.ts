@@ -102,6 +102,7 @@ export type LocationDocument<Lang extends string = string> = prismic.PrismicDocu
 >;
 
 type PageDocumentDataSlicesSlice =
+	| ButtonSlice
 	| LocationsSlice
 	| CtaSlice
 	| ProgramsSlice
@@ -184,7 +185,7 @@ export type PageDocument<Lang extends string = string> = prismic.PrismicDocument
 	Lang
 >;
 
-type ProgramDocumentDataSlicesSlice = RichTextSlice;
+type ProgramDocumentDataSlicesSlice = ButtonSlice | RichTextSlice;
 
 /**
  * Content for Program documents
@@ -490,6 +491,58 @@ type BentoSliceVariation = BentoSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type BentoSlice = prismic.SharedSlice<'bento', BentoSliceVariation>;
+
+/**
+ * Primary content in *Button → Default → Primary*
+ */
+export interface ButtonSliceDefaultPrimary {
+	/**
+	 * Button Link field in *Button → Default → Primary*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: button.default.primary.button_link
+	 * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+	 */
+	button_link: prismic.LinkField;
+
+	/**
+	 * Button Label field in *Button → Default → Primary*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: button.default.primary.button_label
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */
+	button_label: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Button Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ButtonSliceDefault = prismic.SharedSliceVariation<
+	'default',
+	Simplify<ButtonSliceDefaultPrimary>,
+	never
+>;
+
+/**
+ * Slice variation for *Button*
+ */
+type ButtonSliceVariation = ButtonSliceDefault;
+
+/**
+ * Button Shared Slice
+ *
+ * - **API ID**: `button`
+ * - **Description**: Button
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ButtonSlice = prismic.SharedSlice<'button', ButtonSliceVariation>;
 
 /**
  * Primary content in *Cta → Default → Primary*
@@ -974,16 +1027,6 @@ export type RichTextSlice = prismic.SharedSlice<'rich_text', RichTextSliceVariat
  */
 export interface StaffSliceDefaultPrimaryStaffcardItem {
 	/**
-	 * Avatar field in *Staff → Default → Primary → StaffCard*
-	 *
-	 * - **Field Type**: Image
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: staff.default.primary.staffcard[].avatar
-	 * - **Documentation**: https://prismic.io/docs/field#image
-	 */
-	avatar: prismic.ImageField<never>;
-
-	/**
 	 * Name field in *Staff → Default → Primary → StaffCard*
 	 *
 	 * - **Field Type**: Rich Text
@@ -994,6 +1037,16 @@ export interface StaffSliceDefaultPrimaryStaffcardItem {
 	name: prismic.RichTextField;
 
 	/**
+	 * Avatar field in *Staff → Default → Primary → StaffCard*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: staff.default.primary.staffcard[].avatar
+	 * - **Documentation**: https://prismic.io/docs/field#image
+	 */
+	avatar: prismic.ImageField<never>;
+
+	/**
 	 * Bio field in *Staff → Default → Primary → StaffCard*
 	 *
 	 * - **Field Type**: Rich Text
@@ -1002,6 +1055,16 @@ export interface StaffSliceDefaultPrimaryStaffcardItem {
 	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
 	 */
 	bio: prismic.RichTextField;
+
+	/**
+	 * Title field in *Staff → Default → Primary → StaffCard*
+	 *
+	 * - **Field Type**: Title
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: staff.default.primary.staffcard[].title
+	 * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+	 */
+	title: prismic.TitleField;
 }
 
 /**
@@ -1095,6 +1158,10 @@ declare module '@prismicio/client' {
 			BentoSliceDefaultPrimary,
 			BentoSliceVariation,
 			BentoSliceDefault,
+			ButtonSlice,
+			ButtonSliceDefaultPrimary,
+			ButtonSliceVariation,
+			ButtonSliceDefault,
 			CtaSlice,
 			CtaSliceDefaultPrimary,
 			CtaSliceVariation,

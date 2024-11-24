@@ -66,9 +66,9 @@
 	</h2>
 	{#each slice.primary.content as item}
 	<div class="showcase__glow absolute -z-10 w-full max-w-2xl aspect-video rounded-full bg-gradient-to-t from-red-600/50 to-yellow-400/50 via-orange-500/50 mix-blend-screen blur-[120px] filter"/>
-	<div class="relative mt-16 grid items-center gap-8 rounded-xl border border-orange-200/20 bg-gradient-to-b from-slate-50/15 to-slate-50/5 px-8 py-8 backdropblur-sm lg:grid-cols-3 lg:gap-0 lg:py-12">
+	<div class="relative mt-16 grid items-center gap-8 rounded-xl border border-secondary-600/80 bg-gradient-to-b from-tertiary-50/15 to-tertiary-50/5 px-8 py-8 backdropblur-sm lg:grid-cols-3 lg:gap-0 lg:py-12">
 		<div class="grid-background"/>
-		<div>
+		<div >
 				<PrismicRichText field={item.title} components={{em:GoldText, heading3:Heading3}}/>
 			<div class="prose prose-invert prose-xl mt-4 max-w-3xl">
 				<PrismicRichText field={item.body} />
