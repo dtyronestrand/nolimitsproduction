@@ -18,6 +18,7 @@
 	const close = () => (isOpen = false);
 
 	/** @param {import('@prismicio/client').LinkField} link*/
+	
 	const isActive = (link) => {
 		const path = asLink(link);
 
@@ -27,7 +28,7 @@
 
 <header class="p-4 md:p-6">
 	<nav
-		class="mx-auto flex max-w-6xl flex-col justify-between py-2 font-medium text-white md:flex-row md:items-center"
+		class="mx-auto flex max-w-6xl flex-col justify-between py-2 font-medium text-xl md:flex-row md:items-center"
 		aria-label="Main"
 	>
 		<div class="flex items-center justify-between">
@@ -38,7 +39,7 @@
 
 			<button
 				type="button"
-				class="block p-2 text-3xl text-white md:hidden"
+				class="block p-2 text-3xl md:hidden"
 				aria-expanded={isOpen}
 				on:click={toggleOpen}
 			>
@@ -62,24 +63,24 @@
 				<IconClose />
 			</button>
 			<ul class="grid justify-items-end gap-8">
-				{#each settings.data.navigation as item (item.label)}
+				{#each settings.data.navigation as {cta_button, link, label}}
 					<li>
-						{#if item.cta_button}
+						{#if cta_button}
 							<ButtonLink
-								field={item.link}
+								field={link}
 								on:click={close}
-								aria-current={isActive(item.link) ? 'page' : undefined}
+								aria-current={isActive(link) ? 'page' : undefined}
 							>
-								{item.label}
+								{label}
 							</ButtonLink>
 						{:else}
-							<PrismicLink
-								on:click={close}
-								field={item.link}
-								class=" block min-h-11 px-3 text-3xl first:mt-8"
-								aria-current={isActive(item.link) ? 'page' : undefined}
-							>
-								{item.label}
+						<PrismicLink
+						on:click={close}
+						field={link}
+						class="group first:mt-8 relative block overflow-hidden rounded px-3 py-1 text-3xl font-bold text-primary-100" 
+						aria-current={isActive(link) ? 'page' : undefined}
+					> <span class={`absolute inset-0 z-0 h-full rounded bg-orange-600 transition-transform duration-300 ease-in-out group-hover:translate-y-0 ${isActive(link) ? `translate-y-2`: `translate-y-4`}`}></span>
+						<span class="relative">{label}</span>
 							</PrismicLink>
 						{/if}
 					</li>
@@ -89,24 +90,24 @@
 
 		<!-- Desktop Nav -->
 		<ul class="hidden gap-6 md:flex">
-			{#each settings.data.navigation as item (item.label)}
+			{#each settings.data.navigation as {cta_button, link, label}}
 				<li>
-					{#if item.cta_button}
+					{#if cta_button}
 						<ButtonLink
-							field={item.link}
+							field={link}
 							on:click={close}
-							aria-current={isActive(item.link) ? 'page' : undefined}
+							aria-current={isActive(link) ? 'page' : undefined}
 						>
-							{item.label}
+							{label}
 						</ButtonLink>
 					{:else}
 						<PrismicLink
 							on:click={close}
-							field={item.link}
-							class="inline-flex min-h-11 items-center"
-							aria-current={isActive(item.link) ? 'page' : undefined}
-						>
-							{item.label}
+							field={link}
+							class="group relative block overflow-hidden rounded px-3 py-1 text-base font-bold text-primary-100" 
+							aria-current={isActive(link) ? 'page' : undefined}
+						> <span class={`absolute inset-0 z-0 h-full rounded bg-orange-600 transition-transform duration-300 ease-in-out group-hover:translate-y-0 ${isActive(link) ? `translate-y-6`: `translate-y-8`}`}></span>
+							<span class="relative">{label}</span>
 						</PrismicLink>
 					{/if}
 				</li>

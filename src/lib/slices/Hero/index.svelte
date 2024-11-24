@@ -6,6 +6,7 @@
 	import { PrismicRichText, PrismicLink, PrismicImage, PrismicText } from '@prismicio/svelte';
 	import Bounded from '$lib/components/Bounded.svelte';
 	import TriangleGrid from '$lib/components/TriangleGrid.svelte';
+	import GoldText from '$lib/components/GoldText.svelte';
 
 	export let slice: Content.HeroSlice;
 
@@ -50,7 +51,7 @@ onMount(() => {
 	<div class="relative text-center">
 		<TriangleGrid/>
 		<h1 class="hero__heading opacity-0 text-balance text-5xl font-medium max-w-3xl mx-auto  md:text-7xl">
-			<PrismicText field={slice.primary.title} />
+			<PrismicRichText field={slice.primary.title} components={{em:GoldText}} />
 		</h1>
 		<p class="hero__body opacity-0 text-balance mx-auto mt-6 max-w-md text-slate-300">
 			<PrismicText field={slice.primary.body} />
