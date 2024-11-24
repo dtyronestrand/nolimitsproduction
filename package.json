@@ -18,6 +18,8 @@
 	},
 	"devDependencies": {
 		"@iconify-json/ph": "^1.2.1",
+		"@skeletonlabs/skeleton": "^2.10.3",
+		"@skeletonlabs/tw-plugin": "^0.4.0",
 		"@slicemachine/adapter-sveltekit": "^0.3.53",
 		"@sveltejs/adapter-vercel": "^5.4.7",
 		"@sveltejs/kit": "^2.8.1",
@@ -55,6 +57,7 @@
 		"@supabase/ssr": "^0.5.2",
 		"@supabase/supabase-js": "^2.46.1",
 		"@sveltejs/kit": "^2.8.1",
+		"@types/tailwindcss": "^3.0.11",
 		"@vercel/speed-insights": "^1.1.0",
 		"clsx": "^2.1.1",
 		"gsap": "^3.12.5"
