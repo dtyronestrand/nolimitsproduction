@@ -282,6 +282,76 @@ export type ProgramDocument<Lang extends string = string> = prismic.PrismicDocum
 	Lang
 >;
 
+type ProtectedDocumentDataSlicesSlice =
+	| RichTextSlice
+	| HeroSlice
+	| NewsItemSlice
+	| CtaSlice
+	| ButtonSlice
+	| BentoSlice;
+
+/**
+ * Content for Protected documents
+ */
+interface ProtectedDocumentData {
+	/**
+	 * Slice Zone field in *Protected*
+	 *
+	 * - **Field Type**: Slice Zone
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: protected.slices[]
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/field#slices
+	 */
+	slices: prismic.SliceZone<ProtectedDocumentDataSlicesSlice> /**
+	 * Meta Title field in *Protected*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: A title of the page used for social media and search engines
+	 * - **API ID Path**: protected.meta_title
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */;
+	meta_title: prismic.KeyTextField;
+
+	/**
+	 * Meta Description field in *Protected*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: A brief summary of the page
+	 * - **API ID Path**: protected.meta_description
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/field#key-text
+	 */
+	meta_description: prismic.KeyTextField;
+
+	/**
+	 * Meta Image field in *Protected*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: protected.meta_image
+	 * - **Tab**: SEO & Metadata
+	 * - **Documentation**: https://prismic.io/docs/field#image
+	 */
+	meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Protected document from Prismic
+ *
+ * - **API ID**: `protected`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ProtectedDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+	Simplify<ProtectedDocumentData>,
+	'protected',
+	Lang
+>;
+
 /**
  * Item in *Settings → Navigation*
  */
@@ -382,7 +452,12 @@ export type SettingsDocument<Lang extends string = string> = prismic.PrismicDocu
 	Lang
 >;
 
-export type AllDocumentTypes = LocationDocument | PageDocument | ProgramDocument | SettingsDocument;
+export type AllDocumentTypes =
+	| LocationDocument
+	| PageDocument
+	| ProgramDocument
+	| ProtectedDocument
+	| SettingsDocument;
 
 /**
  * Item in *Bento → Default → Primary → Box*
@@ -1149,6 +1224,9 @@ declare module '@prismicio/client' {
 			ProgramDocument,
 			ProgramDocumentData,
 			ProgramDocumentDataSlicesSlice,
+			ProtectedDocument,
+			ProtectedDocumentData,
+			ProtectedDocumentDataSlicesSlice,
 			SettingsDocument,
 			SettingsDocumentData,
 			SettingsDocumentDataNavigationItem,

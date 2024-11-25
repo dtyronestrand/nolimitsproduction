@@ -30,7 +30,7 @@
                 formData = { name: '', email: '', message: '' };
                 errorMessage = '';
                 successMessage = 'Form submitted successfully!';
-                await invalidate(); // Optional: Update the page data
+           
             } else {
                 const data = await response.json();
                 errorMessage = data.message || 'An error occurred. Please try again.';
