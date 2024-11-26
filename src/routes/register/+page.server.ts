@@ -1,49 +1,35 @@
-import { redirect, fail } from '@sveltejs/kit';
-import type { RequestEvent } from '@sveltejs/kit';
-import type {PageServerLoad} from './$types';
+import type { Actions } from './$types';
+import { fail, redirect } from '@sveltejs/kit';
+import bcrypt from 'bcrypt';
+import { supabase } from '$lib/supabase';
 
-export const load: PageServerLoad = async ( { locals } ) => {
+export const actions: Actions = {
+    register: async ({ request }) => {
+        const data = await request.formData();
+        const email = data.get('email');
+        const password = data.get('password');
 
+        if (typeof email !== 'string' || typeof password !== 'string') {
+            return fail(400, { error: 'Invalid form data' });
+        }
 
-  // If user is already logged in, redirect to home
-  if (locals.session) {
-    throw redirect(303, '/');
-  }
+        if (!email || !password) {
+            return fail(400, { error: 'Email and password are required' });
+        }
 
-  return {session: null};
-};
+        try {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const { error } = await supabase
+                .from('users')
+                .insert([{ email, password: hashedPassword }]);
 
-export const actions = {
-  register: async ({ request, locals: { supabase } }: RequestEvent) => {
-    const formData = await request.formData();
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const confirmPassword = formData.get('confirmPassword') as string;
+            if (error) {
+                return fail(500, { error: 'Failed to register user' });
+            }
 
-    if (password !== confirmPassword) {
-      return fail(400, {
-        error: 'Passwords do not match',
-        values: { email }
-      });
+            throw redirect(303, '/login');
+        } catch (err) {
+            return fail(500, { error: 'Server error' });
+        }
     }
-
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${request.headers.get('origin')}/auth/callback`
-      }
-    });
-
-    if (error) {
-      return fail(400, {
-        error: error.message,
-        values: { email }
-      });
-    }
-
-    return {
-      message: 'Please check your email for a confirmation link.'
-    };
-  }
 };
