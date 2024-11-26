@@ -1,3 +1,4 @@
+
 <script>
 	import clsx from 'clsx';
 	import Bounded from '$lib/components/Bounded.svelte';
@@ -15,7 +16,7 @@
 		field={slice.primary.heading}
 		components={{ em: GoldText, heading2: Heading2 }}
 	/>
-	<div class="mx-auto mt-6 max-w-md text-balance text-center text-gray-300">
+	<div class="mx-auto mt-6 max-w-md text-balance text-center prose prose-xl prose-invert text-primary-50">
 		<PrismicRichText field={slice.primary.body} />
 	</div>
 

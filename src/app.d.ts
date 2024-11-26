@@ -8,6 +8,15 @@ declare global {
       session: Session | null
       getSession: () => Promise<Session | null>
     }
+    interface Platform{
+      env:{
+        COUNTER: DurableObjectNamespace;
+      };
+      context:{
+        waitUntil(promise: Promise<any>): void;
+      };
+      caches: CacheStorage & {default: Cache}
+    }
     interface PageData {
       session: Session | null
     }

@@ -20,14 +20,18 @@
 		
 		{#each locations as location, index}
 		
-			<div class= "glass-container relative rounded-lg bg-gradient-to-b from-orange-500 to-orange-700 p-4 mx-10 mb-6 md:rounded-xl">
+			<div class= "card variant-ghost-primary border-primary-500 border-2 relative rounded-lg p-2 px-4 mx-10 mb-6 md:rounded-xl">
 				<div class="glow absolute -z-10 aspect-square w-full max-w-xl h-full rounded-full bg-yellow-400/50 blur-[160px] filter"/>
-				<h2 class="mt-6 prose prose-invert text-center text-balance max-w-xl mb-6 text-5xl mx-auto">
-					<PrismicText field={location.data.title} />
-				</h2>
+				<div class="card-header">
+					<h2 class="mt-4 prose tracking-wider text-primary-50 prose-invert text-center text-balance maxß-w-xl mb-6 text-4xl mx-auto">
+						<PrismicText field={location.data.title} />
+					</h2>
+				</div>
 				<div class="max-w-[400px] max-h-[400px] justify-center text-center mx-auto">
 					<PrismicImage class="mx-auto max-w-[15rem]" field={location.data.image} />
-				<ButtonLink document={location} class="mx-auto mt-6">Details</ButtonLink>
+					<div class="card--footer prose prose-invert prose-lg tracking-winder text-primary-50">
+						<ButtonLink document={location} class="mx-auto mt-6 mb-6 ">Details</ButtonLink>
+					</div>
 				</div>
 		</div>
 		{/each}

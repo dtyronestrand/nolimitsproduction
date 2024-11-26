@@ -1,10 +1,10 @@
 <script>
   import { createBrowserClient } from '@supabase/ssr'
-  import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public'
+ 
   
   const supabase = createBrowserClient(
-      PUBLIC_SUPABASE_URL,
-      PUBLIC_SUPABASE_ANON_KEY
+      import.meta.env.VITE_PUBLIC_SUPABASE_URL,
+      import.meta.env.VITE_PUBLIC_SUPABASE_ANON_KEY
   )
 
   let email = '';
@@ -41,7 +41,7 @@
 
 </script>
 
-<div class="bg-red-400">
+<form>
   <!-- Your existing email/password form -->
   <input
       type="email"
@@ -58,4 +58,4 @@
 
   <!-- Add OAuth button -->
 
-</div>
+</form>

@@ -30,6 +30,13 @@ export const handle: Handle = async ({ event, resolve }) => {
             data: { session },
         } = await event.locals.supabase.auth.getSession()
         return session
+    };
+
+    const session = await event.locals.getSession();
+    if (event.route.id?.startsWith('/protected')){
+        if (!session || session.user.app_metadata?.role !== 'staff'){
+            return new Response("Unauthorized", {status: 403} )
+        }
     }
 
     return resolve(event, {

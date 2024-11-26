@@ -9,7 +9,7 @@
 </script>
 
 <Bounded>
-		<div class="prose prose-xl prose-invert w-full">
+		<div class="prose prose-xl prose-invert text-primary-50 w-full">
 			<PrismicRichText field={slice.primary.content} components={{heading1: Heading1, em:GoldText}}/>
 		</div>
 	
