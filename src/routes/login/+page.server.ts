@@ -1,8 +1,9 @@
 import { redirect, fail } from '@sveltejs/kit';
 import type { RequestEvent } from '@sveltejs/kit';
 import type {PageServerLoad} from './$types';
-
+import type {Actions} from './$types'
 // Define types for load and actions
+
 export const load: PageServerLoad = async ({locals}) => {
 
 

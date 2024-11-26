@@ -5,7 +5,7 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 const config = {
   kit: {
     adapter: adapter({
-      runtime: 'nodejs18.18'
+      runtime: 'nodejs18.x'
     })
   },
   preprocess: vitePreprocess()
