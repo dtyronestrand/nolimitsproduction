@@ -1,28 +1,38 @@
 <script lang="ts">
-    import RegisterForm from '$lib/components/Auth/RegisterForm.svelte';
-    
-    interface ActionData {
-      error?: string;
-      values?: {
-        email: string;
-      };
-    }
-    
-    export let form: ActionData | null = null;
-  </script>
-  
-  <div class="min-h-screen bg-surfsce-900 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md mx-auto">
-      <div class="text-center">
-        <h2 class="text-3xl font-bold text-primary-50 tracking-wider">Create an account</h2>
-        <p class="mt-2 text-lg text-primary-50">
-          Or
-          <a href="/login" class="font-medium text-secondary-300 hover:text-tertiary-700">
-            sign in to your account
-          </a>
-        </p>
-      </div>
-      
-      <RegisterForm {form} />
-    </div>
-  </div>
+	let email = '';
+	let password = '';
+	let errorMessage = '';
+
+	const register = async () => {
+		let formData = new FormData();
+		formData.append('email', email);
+		formData.append('password', password);
+
+		const response = await fetch('/register', {
+			method: 'POST',
+			body: formData
+		});
+
+		const result = await response.json();
+		if (response.ok) {
+			window.location.href = '/login';
+		} else {
+			errorMessage = result.error;
+		}
+	};
+</script>
+
+<form on:submit|preventDefault={register}>
+	<div>
+		<label for="email">Email:</label>
+		<input id="email" type="email" bind:value={email} required />
+	</div>
+	<div>
+		<label for="password">Password:</label>
+		<input id="password" type="password" bind:value={password} required />
+	</div>
+	<button type="submit">Register</button>
+	{#if errorMessage}
+		<p style="color: red;">{errorMessage}</p>
+	{/if}
+</form>
