@@ -1,40 +1,49 @@
 import { redirect, fail } from '@sveltejs/kit';
-import type { RequestEvent } from '@sveltejs/kit';
-import type {PageServerLoad} from './$types';
-import type {Actions} from './$types'
+
+import type {Actions, PageServerLoad} from './$types';
+
 // Define types for load and actions
 
-export const load: PageServerLoad = async ({locals}) => {
-
+export const load: PageServerLoad = async ({locals:{safeGetSession}}) => {
+const {session} = await safeGetSession();
 
   // If user is already logged in, redirect to home
-  if (locals.session) {
+  if (session) {
     throw redirect(303, '/');
   }
 
-  return {session: null};
+  return {};
 };
 
-export const actions = {
-  login: async ({ request, locals: { supabase } }: RequestEvent) => {
+export const actions: Actions = {
+  default: async (event) => {
+    const{
+      
+      request,
+      locals:{supabase},
+    } = event 
     const formData = await request.formData();
     const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
+    const validEmail = /^[\w-\.+]+@([\w-]+\.)+[\w-]{2,8}$/.test(email)
+    if (!validEmail) {
+      return fail(400, { errors: { email: 'Please enter a valid email address' }, email })
+    }
+   
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password
+    const { error } = await supabase.auth.signInWithOtp({
+      email
     });
 
     if (error) {
       return fail(400, {
         error: error.message,
-        values: {
-          email
-        }
+     email
       });
     }
 
-    throw redirect(303, '/');
+   return {
+    success: true,
+    message: 'Please check your email for a one-time login link',
+   }
   }
 };

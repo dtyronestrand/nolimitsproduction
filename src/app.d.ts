@@ -4,9 +4,8 @@ import type {Database} from '$lib/supabase-types'
 declare global {
   namespace App {
     interface Locals {
-      supabase: SupabaseClient<Database>
-      session: Session | null
-      getSession: () => Promise<Session | null>
+      supabase: SupabaseClient
+      safeGetSession(): Promise<{session: Session | null; user: User | null}>
     }
     interface Platform{
       env:{
@@ -19,6 +18,7 @@ declare global {
     }
     interface PageData {
       session: Session | null
+      user: User | null
     }
   }
 }

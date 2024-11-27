@@ -25,14 +25,24 @@ export const handle: Handle = async ({ event, resolve }) => {
         }
     )
 
-    event.locals.getSession = async () => {
+    event.locals.safeGetSession = async () => {
         const {
             data: { session },
         } = await event.locals.supabase.auth.getSession()
-        return session
+        if (!session){
+            return {session: null, user: null}
+        }
+        const {
+            data: {user},
+            error,
+           }=await event.locals.supabase.auth.getUser()
+           if (error){
+            return {session: null, user: null}
+           }
+        return {session, user}
     };
 
-    const session = await event.locals.getSession();
+    const session = await event.locals.safeGetSession();
     if (event.route.id?.startsWith('/protected')){
         if (!session || session.user.app_metadata?.role !== 'staff'){
             return new Response("Unauthorized", {status: 403} )
@@ -41,7 +51,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     return resolve(event, {
         filterSerializedResponseHeaders(name) {
-            return name === 'content-range'
+            return name === 'content-range' || name === 'x-supabase-api-version'
         },
     })
 }
