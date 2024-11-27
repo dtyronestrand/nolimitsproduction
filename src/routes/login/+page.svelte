@@ -1,7 +1,7 @@
 <script lang="ts">
   
     import {enhance} from '$app/forms'
-    import type {ActionData, SubmitFunction} from './$types.js'
+    import type {ActionData, SubmitFunction} from './$types'
     export let form: ActionData;
     let loading = false
     const handleSubmit: SubmitFunction = ()=>{
@@ -17,7 +17,7 @@
   <div class="min-h-screen bg-surface-900 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md mx-auto">
       <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-primary-50">Sign in to your account</h2>
+        <h2 class="text-5xl md:text-7xl text-primary-50">Sign in to your account</h2>
         <form method="POST" use:enhance={handleSubmit}>
         <p>Enter your email address below to receive a one-time login link.</p>
         {#if form?.message !==undefined}
