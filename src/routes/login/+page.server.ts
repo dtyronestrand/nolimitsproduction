@@ -1,50 +1,47 @@
-import { redirect, fail } from '@sveltejs/kit';
+// src/routes/login/+page.server.ts
+import { fail, redirect } from '@sveltejs/kit';
+import type { Actions } from './$types';
+import { createClient } from '@supabase/supabase-js';
 
-import type {Actions, PageServerLoad} from './$types';
+// Ensure these are set in your .env file
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-// Define types for load and actions
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-export const load: PageServerLoad = async ({locals:{safeGetSession}}) => {
-const {session} = await safeGetSession();
+export const actions = {
+    googleSignIn: async ({ cookies, url }) => {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: `${url.origin}/auth/callback`,
+                skipBrowserRedirect: true
+            }
+        });
 
-  // If user is already logged in, redirect to home
-  if (session) {
-    throw redirect(303, '/');
-  }
+        if (error) {
+            return fail(400, { 
+                message: 'Google Sign-In failed',
+                error: error.message 
+            });
+        }
 
-  return {};
-};
+        // If using a server-side redirect
+        if (data.url) {
+            throw redirect(302, data.url);
+        }
+    },
 
-export const actions: Actions = {
-  default: async (event) => {
-    const{
-      
-      request,
-      locals:{supabase},
-    } = event 
-    const formData = await request.formData();
-    const email = formData.get('email') as string;
-    // eslint-disable-next-line no-useless-escape
-    const validEmail = /^[\w-\.+]+@([\w-]+\.)+[\w-]{2,8}$/.test(email)
-    if (!validEmail) {
-      return fail(400, { errors: { email: 'Please enter a valid email address' }, email })
+    signOut: async ({ locals }) => {
+        const { error } = await locals.supabase.auth.signOut();
+        
+        if (error) {
+            return fail(500, {
+                message: 'Sign out failed',
+                error: error.message
+            });
+        }
+
+        throw redirect(302, '/');
     }
-   
-
-    const { error } = await supabase.auth.signInWithOtp({
-      email
-    });
-
-    if (error) {
-      return fail(400, {
-        error: error.message,
-     email
-      });
-    }
-
-   return {
-    success: true,
-    message: 'Please check your email for a one-time login link',
-   }
-  }
-};
+} satisfies Actions;
