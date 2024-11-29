@@ -1,40 +1,47 @@
-import { redirect, fail } from '@sveltejs/kit';
-import type { RequestEvent } from '@sveltejs/kit';
-import type {PageServerLoad} from './$types';
-import type {Actions} from './$types'
-// Define types for load and actions
+// src/routes/login/+page.server.ts
+import { fail, redirect } from '@sveltejs/kit';
+import type { Actions } from './$types';
+import { createClient } from '@supabase/supabase-js';
 
-export const load: PageServerLoad = async ({locals}) => {
+// Ensure these are set in your .env file
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-
-  // If user is already logged in, redirect to home
-  if (locals.session) {
-    throw redirect(303, '/');
-  }
-
-  return {session: null};
-};
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export const actions = {
-  login: async ({ request, locals: { supabase } }: RequestEvent) => {
-    const formData = await request.formData();
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
+    googleSignIn: async ({ cookies, url }) => {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: `${url.origin}/auth/callback`,
+                skipBrowserRedirect: true
+            }
+        });
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    });
-
-    if (error) {
-      return fail(400, {
-        error: error.message,
-        values: {
-          email
+        if (error) {
+            return fail(400, { 
+                message: 'Google Sign-In failed',
+                error: error.message 
+            });
         }
-      });
-    }
 
-    throw redirect(303, '/');
-  }
-};
+        // If using a server-side redirect
+        if (data.url) {
+            throw redirect(302, data.url);
+        }
+    },
+
+    signOut: async ({ locals }) => {
+        const { error } = await locals.supabase.auth.signOut();
+        
+        if (error) {
+            return fail(500, {
+                message: 'Sign out failed',
+                error: error.message
+            });
+        }
+
+        throw redirect(302, '/');
+    }
+} satisfies Actions;
