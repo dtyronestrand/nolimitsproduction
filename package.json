@@ -62,7 +62,6 @@
 		"@sveltejs/kit": "^2.8.1",
 		"@types/tailwindcss": "^3.0.11",
 		"@vercel/speed-insights": "^1.1.0",
-		"bcrypt": "^5.1.1",
 		"clsx": "^2.1.1",
 		"gsap": "^3.12.5"
 	},
