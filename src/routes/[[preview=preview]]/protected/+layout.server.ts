@@ -3,7 +3,7 @@ import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async ({ locals }) => {
   // Get session information from locals
-  const session = await locals.getSession();
+  const session = await locals.safeGetSession();
 
   // Check if the user is authorized to access the protected pages
   if (!session || session.user?.app_metadata?.role !== 'staff') {
