@@ -3,9 +3,39 @@
   import { enhance } from '$app/forms';
   import type { ActionData } from './$types';
   
+    import {enhance} from '$app/forms'
+    import type {ActionData, SubmitFunction} from './$types.js'
+    export let form: ActionData;
+    let loading = false
+    const handleSubmit: SubmitFunction = ()=>{
+      loading = true
+      return async ({update})=>{
+        update()
+        loading = false
+      }
+    }
+    
+  </script>
   export let form: ActionData;
 </script>
 
+  <div class="min-h-screen bg-surface-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md mx-auto">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-primary-50">Sign in to your account</h2>
+        <form method="POST" use:enhance={handleSubmit}>
+        <p>Enter your email address below to receive a one-time login link.</p>
+        {#if form?.message !==undefined}
+        <div class="success {form?.success ? `` : `fail`}">
+          {form?.message}
+        </div>
+        {/if}
+        <p class="mt-2 text-lg text-orange-600">
+          Or
+          <a href="/register" class="font-medium text-amber-200 hover:text-yellow-400">
+            create a new account
+          </a>
+        </p>
 <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
       <div>
